@@ -1,27 +1,23 @@
-import {Component} from '@angular/core';
-import {Http} from '@angular/http';
+import {Component, OnInit} from '@angular/core';
+import {PostService} from '../services/post.service';
 
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.css']
 })
-export class PostsComponent {
+export class PostsComponent implements OnInit {
 
   posts: any[];
   private url = 'https://jsonplaceholder.typicode.com/posts';
 
-  constructor(private http: Http) {
-    http.get(this.url)
-      .subscribe(response => {
-        this.posts = response.json();
-        console.log(response.json());
-      });
+
+  constructor(private service: PostService) {
   }
 
   createPost(titleInput: HTMLInputElement) {
     const postObj = {title: titleInput.value};
-    this.http.post(this.url, JSON.stringify(postObj))
+    this.service.createPost(titleInput, postObj)
       .subscribe(response => {
         postObj['id'] = response.json().id;
         this.posts.splice(0, 0, postObj);
@@ -30,10 +26,35 @@ export class PostsComponent {
   }
 
   updatePost(post) {
-    this.http.patch(this.url + '/' + post.id, JSON.stringify({isRead: true}))
+    this.service.updatePost(post)
       .subscribe(response => {
         console.log(response.json());
       });
+  }
+
+  deletePost(post) {
+    this.service.deletePost(post)
+      .subscribe(response => {
+        let index = this.posts.indexOf(post);
+        this.posts.splice(index, 1);
+        console.log(response.json());
+      });
+  }
+
+  ngOnInit() {
+    this.service.getPosts()
+      .subscribe(response => {
+          this.posts = response.json();
+        },
+        (error: Response) => {
+          if (error.status === 404) {
+            alert('This post has already been deleted');
+          } else {
+            alert('an Unexpected error occured.');
+          }
+
+          console.log(error);
+        });
   }
 
 

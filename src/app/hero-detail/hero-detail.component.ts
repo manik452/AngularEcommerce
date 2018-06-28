@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Hero} from '../ViewModel/hero';
-import {HEROES} from '../mock-heroes';
+import {HEROES} from '../services/mock-heroes';
 
 @Component({
   selector: 'app-hero-detail',
