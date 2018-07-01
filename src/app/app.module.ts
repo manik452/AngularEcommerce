@@ -1,5 +1,9 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import {AngularFireModule} from 'angularfire2';
+import {AngularFireDatabaseModule} from 'angularfire2/database';
+import {AngularFireAutModule} from 'angularfire2/auth';
+
 import {FormsModule} from '@angular/forms';
 import {AppComponent} from './app.component';
 import {HeroesComponent} from './heroes/heroes.component';
@@ -20,7 +24,7 @@ const appRoutes: Routes = [
   {path: 'posts', component: PostsComponent},
   {
     path: '',
-    redirectTo: '/heroes',
+    redirectTo: '/flower',
     pathMatch: 'full'
   },
   {path: '**', component: PageNotFoundComponent}
@@ -42,6 +46,8 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     HttpModule,
+    AngularFireModule,
+
     RouterModule.forRoot(
       appRoutes,
       {enableTracing: true} // <-- debugging purposes only
