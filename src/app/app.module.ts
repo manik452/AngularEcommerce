@@ -27,18 +27,22 @@ import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { LoginComponent } from './login/login.component';
+import {AngularFireAuth} from 'angularfire2/auth';
+import {AuthService} from './services/auth.service';
+import {AuthGuardService} from './auth-guard.service';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
+  {path: 'login', component: LoginComponent},
   {path: 'products', component: ProductsComponent},
   {path: 'shopping-cart', component: ShoppingCartComponent},
-  {path: 'check-out', component: CheckOutComponent},
-  {path: 'order-success', component: OrderSuccessComponent},
-  {path: 'my/orders', component: MyOrdersComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'admin/products', component: AdminProductsComponent},
-  {path: 'admin/orders', component: AdminOrdersComponent},
 
+  {path: 'check-out', component: CheckOutComponent, canActivate:[AuthGuardService]},
+  {path: 'order-success', component: OrderSuccessComponent, canActivate:[AuthGuardService]},
+  {path: 'my/orders', component: MyOrdersComponent, canActivate:[AuthGuardService]},
+
+  {path: 'admin/products', component: AdminProductsComponent, canActivate:[AuthGuardService]},
+  {path: 'admin/orders', component: AdminOrdersComponent, canActivate:[AuthGuardService]},
 
 
   {path: 'flower', component: GithubFollowerComponent},
@@ -86,7 +90,10 @@ const appRoutes: Routes = [
     )
   ],
   providers: [
-    PostService
+    PostService,
+    AngularFireAuth,
+    AuthService,
+    AuthGuardService
   ],
   bootstrap: [AppComponent]
 })

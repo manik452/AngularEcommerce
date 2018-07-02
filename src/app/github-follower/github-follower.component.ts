@@ -11,7 +11,7 @@ export class GithubFollowerComponent implements OnInit {
   followers: any;
 
   constructor(private service: PostService) {
-    console.log(service);
+    /*console.log(service);*/
   }
 
   ngOnInit() {

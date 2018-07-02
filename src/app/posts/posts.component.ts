@@ -28,7 +28,7 @@ export class PostsComponent implements OnInit {
   updatePost(post) {
     this.service.updatePost(post)
       .subscribe(response => {
-        console.log(response.json());
+        /*console.log(response.json());*/
       });
   }
 
@@ -37,7 +37,7 @@ export class PostsComponent implements OnInit {
       .subscribe(response => {
         let index = this.posts.indexOf(post);
         this.posts.splice(index, 1);
-        console.log(response.json());
+        /*console.log(response.json());*/
       });
   }
 
@@ -53,7 +53,7 @@ export class PostsComponent implements OnInit {
             alert('an Unexpected error occured.');
           }
 
-          console.log(error);
+         // console.log(error);
         });
   }
 
