@@ -1,0 +1,6 @@
+create Ng project
+ng new project_Name
+
+run project
+ng serve
+
