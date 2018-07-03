@@ -30,6 +30,7 @@ import { LoginComponent } from './login/login.component';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {AuthService} from './services/auth.service';
 import {AuthGuardService} from './auth-guard.service';
+import {UserService} from './services/user.service';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -93,7 +94,8 @@ const appRoutes: Routes = [
     PostService,
     AngularFireAuth,
     AuthService,
-    AuthGuardService
+    AuthGuardService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })
