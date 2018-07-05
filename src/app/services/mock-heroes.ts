@@ -1,4 +1,4 @@
-import {Hero} from '../ViewModel/hero';
+import {Hero} from '../models/ViewModel/hero';
 
 export const HEROES: Hero[] = [
   {id: 11, name: 'Mr. Nice'},

@@ -31,6 +31,7 @@ import {AngularFireAuth} from 'angularfire2/auth';
 import {AuthService} from './services/auth.service';
 import {AuthGuardService} from './auth-guard.service';
 import {UserService} from './services/user.service';
+import {AdminAuthGuardService} from './services/admin-auth-guard.service';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -42,8 +43,8 @@ const appRoutes: Routes = [
   {path: 'order-success', component: OrderSuccessComponent, canActivate:[AuthGuardService]},
   {path: 'my/orders', component: MyOrdersComponent, canActivate:[AuthGuardService]},
 
-  {path: 'admin/products', component: AdminProductsComponent, canActivate:[AuthGuardService]},
-  {path: 'admin/orders', component: AdminOrdersComponent, canActivate:[AuthGuardService]},
+  {path: 'admin/products', component: AdminProductsComponent, canActivate:[AuthGuardService, AdminAuthGuardService]},
+  {path: 'admin/orders', component: AdminOrdersComponent, canActivate:[AuthGuardService, AdminAuthGuardService]},
 
 
   {path: 'flower', component: GithubFollowerComponent},
@@ -95,6 +96,7 @@ const appRoutes: Routes = [
     AngularFireAuth,
     AuthService,
     AuthGuardService,
+    AdminAuthGuardService,
     UserService
   ],
   bootstrap: [AppComponent]
